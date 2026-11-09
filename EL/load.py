@@ -1,8 +1,17 @@
+import os
 import psycopg2
 from psycopg2 import extras
+from dotenv import load_dotenv
 
-from config import DB_CONFIG
+load_dotenv()
 
+DB_CONFIG = {
+    "host": os.getenv("PGHOST", "localhost"),
+    "port": os.getenv("PGPORT", "5432"),
+    "dbname": os.getenv("PGDATABASE"),
+    "user": os.getenv("PGUSER"),
+    "password": os.getenv("PGPASSWORD"),
+}
 def saving(races, drivers, results):
     conn: psycopg2.extensions.connection = psycopg2.connect(**DB_CONFIG, cursor_factory=extras.RealDictCursor)
     cur: psycopg2.extensions.cursor = conn.cursor()
