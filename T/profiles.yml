@@ -3,10 +3,10 @@ f1_transform:
   outputs:
     dev:
       type: postgres
-      host: localhost
+      host: "{{ env_var('PGHOST', 'localhost') }}"
       port: 5432
-      user: postgres
-      password: postgres
-      dbname: f1
+      user: "{{ env_var('PGUSER') }}"
+      password: "{{ env_var('PGPASSWORD') }}"
+      dbname: "{{ env_var('PGDATABASE') }}"
       schema: public
       threads: 1
